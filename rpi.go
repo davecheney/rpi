@@ -124,8 +124,10 @@ func init() {
 func GPIOFSel(pin, mode uint8) {
 	offset := pin / 10
 	shift := (pin % 10) * 3
+	value := *gpfsel[offset]
 	mask := BCM2835_GPIO_FSEL_MASK << shift
-	value := uint32(mode) << shift
+	value &= ^uint32(mask)
+	value |= uint32(mode) << shift
 	*gpfsel[offset] = value & mask
 }
 
