@@ -37,14 +37,6 @@ func initGPIO(memfd int) {
 	}
 }
 
-func GPIOFSel(pin, mode uint8) {
-	offset := pin / 10
-	shift := (pin % 10) * 3
-	mask := BCM2835_GPIO_FSEL_MASK << shift
-	value := uint32(mode) << shift
-	*gpfsel[offset] = value & mask
-}
-
 func GPIOSet(pin uint8) {
 	offset := pin / 32
 	shift := pin % 32
@@ -61,4 +53,14 @@ func GPIOGet(pin uint8) bool {
 	offset := pin / 32
 	shift := pin % 32
 	return *gplev[offset]&(1<<shift) == (1 << shift)
+}
+
+func GPIOFSel(pin, mode uint8) {
+	offset := pin / 10
+	shift := (pin % 10) * 3
+	value := *gpfsel[offset]
+	mask := BCM2835_GPIO_FSEL_MASK << shift
+	value &= ^uint32(mask)
+	value |= uint32(mode) << shift
+	*gpfsel[offset] = value & mask
 }

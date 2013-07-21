@@ -12,8 +12,8 @@ func main() {
 	defer rpi.GPIOClear(rpi.GPIO_P1_22)
 	for {
 		rpi.GPIOSet(rpi.GPIO_P1_22)
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(10 * time.Millisecond)
 		rpi.GPIOClear(rpi.GPIO_P1_22)
-		time.Sleep(100 * time.Millisecond)
+		time.Sleep(10 * time.Millisecond)
 	}
 }
