@@ -10,3 +10,8 @@ See the examples
 
  - blink, blinks a led a 10hz attached to GPIO25 (Pin P1-22)
  - gpiodump, dumps the output of the first 32 GPIO pins
+
+see also
+--------
+
+You may be interested in our new project, [github.com/davecheney/gpio]
